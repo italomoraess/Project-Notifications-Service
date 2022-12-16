@@ -5,7 +5,7 @@ import { PrismaService } from './prisma.service';
 
 @Controller('notifications')
 export class AppController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Get()
   list() {
@@ -13,14 +13,15 @@ export class AppController {
   }
 
   @Post()
-  async create (@Body() body: CreateNotificationBody) {
+  async create(@Body() body: CreateNotificationBody) {
     const { recipientId, content, category } = body;
-    await this.prisma.notification.create({ 
+    await this.prisma.notification.create({
       data: {
         id: randomUUID(),
         content,
         category,
         recipientId,
-    }})
+      }
+    })
   }
 }
